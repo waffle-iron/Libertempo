@@ -125,17 +125,18 @@ class Fonctions
             'table-condensed',
             'table-striped',
         ]);
-        $childTable = '<thead>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
         // affichage TITRE
-        $childTable .= '<tr>';
-        $childTable .= '<th>&nbsp;</th>';
-        $childTable .= '<th>' . _('admin_groupes_groupe') . '</th>';
-        $childTable .= '<th>' . _('admin_groupes_libelle') . '</th>';
-        $childTable .= '</tr>';
-        $childTable .= '</thead>';
-        $childTable .= '<tbody>';
+        $childThead = '<tr>';
+        $childThead .= '<th>&nbsp;</th>';
+        $childThead .= '<th>' . _('admin_groupes_groupe') . '</th>';
+        $childThead .= '<th>' . _('admin_groupes_libelle') . '</th>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
-        // on rempli un autre tableau des groupes dont resp est responsables
+        // on rempli un autre tableau des groupes dont resp est responsable
         $tab_resp=array();
         $sql_r = 'SELECT gr_gid FROM conges_groupe_resp WHERE gr_login="'. \includes\SQL::quote($choix_resp).'" ORDER BY gr_gid ';
         $ReqLog_r = \includes\SQL::query($sql_r);
@@ -187,12 +188,14 @@ class Fonctions
                 'table-condensed',
                 'table-striped',
             ]);
-            $childTable = '<thead>';
-            $childTable .= '<th>&nbsp;</th>';
-            $childTable .= '<th>' . _('admin_groupes_groupe') . '</th>';
-            $childTable .= '<th>' . _('admin_groupes_libelle') . '</th>';
-            $childTable .= '</tr>';
-            $childTable .= '</thead><tbody>';
+            $thead = new \App\Libraries\Structure\Table\Thead();
+            $childThead = '<th>&nbsp;</th>';
+            $childThead .= '<th>' . _('admin_groupes_groupe') . '</th>';
+            $childThead .= '<th>' . _('admin_groupes_libelle') . '</th>';
+            $childThead .= '</tr>';
+            $thead->addChild($childThead);
+            $table->addChild($thead);
+            $childTable = '<tbody>';
 
             // on rempli un autre tableau des groupes dont resp est GRAND responsables
             $tab_grd_resp=array();
@@ -270,13 +273,14 @@ class Fonctions
             'table-condensed',
             'table-striped',
         ]);
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
-        $childTable .= '<th>' . _('divers_responsable_maj_1') . '</th>';
-        $childTable .= '<th>' . _('divers_login') . '</th>';
-        $childTable .= '</tr>';
-        $childTable .= '</thead>';
-        $childTable .= '<tbody>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th>' . _('divers_responsable_maj_1') . '</th>';
+        $childThead .= '<th>' . _('divers_login') . '</th>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         $i = true;
         while ($resultat_resp = $ReqLog_resp->fetch_array()) {
@@ -408,16 +412,15 @@ class Fonctions
             'table-condensed',
             'table-striped',
         ]);
-        $childTable = '<thead>';
-
-        // affichage TITRE
-        $childTable .= '<tr>';
-        $childTable .= '<th>&nbsp;</th>';
-        $childTable .= '<th>' . _('divers_personne_maj_1') . '</th>';
-        $childTable .= '<th>' . _('divers_login') . '</th>';
-        $childTable .= '</tr>';
-        $childTable .= '</thead>';
-        $childTable .= '<tbody>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th>&nbsp;</th>';
+        $childThead .= '<th>' . _('divers_personne_maj_1') . '</th>';
+        $childThead .= '<th>' . _('divers_login') . '</th>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         // on rempli un autre tableau des responsables du groupe
         $tab_group=array();
@@ -470,14 +473,15 @@ class Fonctions
                 'table-condensed',
                 'table-striped',
             ]);
-            $childTable = '<thead>';
-
-            // affichage TITRE
-            $childTable .= '<tr>';
-            $childTable .= '<th>&nbsp;</th>';
-            $childTable .= '<th>' . _('divers_personne_maj_1') . '&nbsp;:</th>';
-            $childTable .= '<th>' . _('divers_login') . '&nbsp;:</th>';
-            $childTable .= '</tr></thead><tbody>';
+            $thead = new \App\Libraries\Structure\Table\Thead();
+            $childThead = '<tr>';
+            $childThead .= '<th>&nbsp;</th>';
+            $childThead .= '<th>' . _('divers_personne_maj_1') . '&nbsp;:</th>';
+            $childThead .= '<th>' . _('divers_login') . '&nbsp;:</th>';
+            $childThead .= '</tr>';
+            $thead->addChild($childThead);
+            $table->addChild($thead);
+            $childTable = '<tbody>';
 
             // on rempli un autre tableau des grands responsables du groupe
             $tab_group_grd=array();
@@ -551,11 +555,14 @@ class Fonctions
             'table-condensed',
             'table-striped',
         ]);
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
-        $childTable .= '<th>' . _('admin_groupes_groupe') . '</th>';
-        $childTable .= '<th>' . _('admin_groupes_libelle') . '</th>';
-        $childTable .= '</tr></thead><tbody>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th>' . _('admin_groupes_groupe') . '</th>';
+        $childThead .= '<th>' . _('admin_groupes_libelle') . '</th>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         $ReqLog_gr = \includes\SQL::query($sql_gr);
         while ($resultat_gr = $ReqLog_gr->fetch_array()) {
@@ -732,14 +739,15 @@ class Fonctions
         ]);
 
         // affichage TITRE
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
-        $childTable .= '<th></th>';
-        $childTable .= '<th>' . _('divers_personne_maj_1') . '</th>';
-        $childTable .= '<th>' . _('divers_login') . '</th>';
-        $childTable .= '</tr>';
-        $childTable .= '</thead>';
-        $childTable .= '<tbody>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th></th>';
+        $childThead .= '<th>' . _('divers_personne_maj_1') . '</th>';
+        $childThead .= '<th>' . _('divers_login') . '</th>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         // affichage des users
 
@@ -825,13 +833,14 @@ class Fonctions
             'table-responsive',
             'table-condensed',
         ]);
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
-        $childTable .= '<th>' . _('admin_groupes_groupe') . '</th>';
-        $childTable .= '<th>' . _('admin_groupes_libelle') . '</th>';
-        $childTable .= '</tr>';
-        $childTable .= '</thead>';
-        $childTable .= '<tbody>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th>' . _('admin_groupes_groupe') . '</th>';
+        $childThead .= '<th>' . _('admin_groupes_libelle') . '</th>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         $i = true;
         $ReqLog_gr = \includes\SQL::query($sql_gr);
@@ -907,13 +916,14 @@ class Fonctions
             'table-condensed',
         ]);
 
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
-        $childTable .= '<th>' . _('divers_nom_maj_1') . '  ' . _('divers_prenom_maj_1') . '</th>';
-        $childTable .= '<th>' . _('divers_login_maj_1') . '</th>';
-        $childTable .= '</tr>';
-        $childTable .= '</thead>';
-        $childTable .= '<tbody>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th>' . _('divers_nom_maj_1') . '  ' . _('divers_prenom_maj_1') . '</th>';
+        $childThead .= '<th>' . _('divers_login_maj_1') . '</th>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         $i = true;
         $ReqLog_user = \includes\SQL::query($sql_user);
@@ -953,14 +963,15 @@ class Fonctions
             'table-striped',
             'table-condensed'
         ]);
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
-        $childTable .= '<th></th>';
-        $childTable .= '<th>' . _('admin_groupes_groupe') . '</th>';
-        $childTable .= '<th>' . _('admin_groupes_libelle') . '</th>';
-        $childTable .= '</tr>';
-        $childTable .= '</thead>';
-        $childTable .= '<tbody>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th></th>';
+        $childThead .= '<th>' . _('admin_groupes_groupe') . '</th>';
+        $childThead .= '<th>' . _('admin_groupes_libelle') . '</th>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         // affichage des groupes
 
@@ -1186,15 +1197,18 @@ class Fonctions
             'table-striped',
             'table-condensed'
         ]);
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
-        $childTable .= '<th>' . _('admin_groupes_groupe') . '</th>';
-        $childTable .= '<th>' . _('admin_groupes_libelle') . '</th>';
-        $childTable .= '<th>' . _('admin_groupes_nb_users') . '</th>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th>' . _('admin_groupes_groupe') . '</th>';
+        $childThead .= '<th>' . _('admin_groupes_libelle') . '</th>';
+        $childThead .= '<th>' . _('admin_groupes_nb_users') . '</th>';
         if($_SESSION['config']['double_validation_conges']) {
-            $childTable .= '<th>' . _('admin_groupes_double_valid') . '</th>';
+            $childThead .= '<th>' . _('admin_groupes_double_valid') . '</th>';
         }
-        $childTable .= '<th></th></tr></thead><tbody>';
+        $childThead .= '<th></th></tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         $i = true;
         $ReqLog_gr = \includes\SQL::query($sql_gr);
@@ -1238,13 +1252,17 @@ class Fonctions
         $table->addClasses([
             'table',
         ]);
-        $childTable = '<thead><tr>';
-        $childTable .= '<th><b>' . _('admin_groupes_groupe') . '</b></th>';
-        $childTable .= '<th>' . _('admin_groupes_libelle') . ' / ' . _('divers_comment_maj_1') . '</th>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th><b>' . _('admin_groupes_groupe') . '</b></th>';
+        $childThead .= '<th>' . _('admin_groupes_libelle') . ' / ' . _('divers_comment_maj_1') . '</th>';
         if($_SESSION['config']['double_validation_conges']) {
-            $childTable .= '<th>' . _('admin_groupes_double_valid') . '</th>';
+            $childThead .= '<th>' . _('admin_groupes_double_valid') . '</th>';
         }
-        $childTable .= '</tr></thead><tbody>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         $text_groupname = '<input class="form-control" type="text" name="new_group_name" size="30" maxlength="50" value="' . $new_group_name . '">';
         $text_libelle = '<input class="form-control" type="text" name="new_group_libelle" size="50" maxlength="250" value="' . $new_group_libelle . '">';
@@ -1329,26 +1347,27 @@ class Fonctions
             'table-striped',
             'table-condensed'
         ]);
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
-        $childTable .= '<th>' .  _('user') . '</th>';
-        $childTable .= '<th>' . _('divers_quotite_maj_1') . '</th>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th>' .  _('user') . '</th>';
+        $childThead .= '<th>' . _('divers_quotite_maj_1') . '</th>';
         foreach ($tab_type_conges as $id_type_cong => $libelle) {
-            $childTable .= '<th>' . $libelle . ' / ' . _('divers_an') . '</th>';
-            $childTable .= '<th>' . _('divers_solde') . ' ' . $libelle . '</th>';
+            $childThead .= '<th>' . $libelle . ' / ' . _('divers_an') . '</th>';
+            $childThead .= '<th>' . _('divers_solde') . ' ' . $libelle . '</th>';
         }
 
         foreach ($tab_type_conges_exceptionnels as $id_type_cong => $libelle) {
-            $childTable .= '<th>' . _('divers_solde') . ' ' . $libelle . '</th>';
+            $childThead .= '<th>' . _('divers_solde') . ' ' . $libelle . '</th>';
         }
-        $childTable .= '<th></th>';
-        $childTable .= '<th></th>';
+        $childThead .= '<th></th>';
+        $childThead .= '<th></th>';
         if($_SESSION['config']['admin_change_passwd']) {
-            $childTable .= '<th></th>';
+            $childThead .= '<th></th>';
         }
-        $childTable .= '</tr>';
-        $childTable .= '</thead>';
-        $childTable .= '<tbody>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         // Récuperation des informations des users:
         $tab_info_users=array();
@@ -1483,16 +1502,17 @@ class Fonctions
         $table = new \App\Libraries\Structure\Table();
         $table->addClasses(['tablo']);
         $table->addAttribute('width', '80%');
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
-        $childTable .= '<th>' . _('divers_login_maj_1') . '</th>';
-        $childTable .= '<th>' . _('divers_nom_maj_1') . '</th>';
-        $childTable .= '<th>' . _('divers_prenom_maj_1') . '</th>';
-        $childTable .= '<th>' . _('admin_users_password_1') . '</th>';
-        $childTable .= '<th>' . _('admin_users_password_2') . '</th>';
-        $childTable .= '</tr>';
-        $childTable .= '</thead>';
-        $childTable .= '<tbody>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th>' . _('divers_login_maj_1') . '</th>';
+        $childThead .= '<th>' . _('divers_nom_maj_1') . '</th>';
+        $childThead .= '<th>' . _('divers_prenom_maj_1') . '</th>';
+        $childThead .= '<th>' . _('admin_users_password_1') . '</th>';
+        $childThead .= '<th>' . _('admin_users_password_2') . '</th>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         $childTable .= '<tr align="center">';
 
@@ -2069,14 +2089,17 @@ class Fonctions
             'table-striped',
             'table-condensed'
         ]);
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
-        $childTable .= '<th>' . _('admin_groupes_groupe') . '</th>';
-        $childTable .= '<th>' . _('admin_groupes_libelle') . ' / ' . _('divers_comment_maj_1') . '</th>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th>' . _('admin_groupes_groupe') . '</th>';
+        $childThead .= '<th>' . _('admin_groupes_libelle') . ' / ' . _('divers_comment_maj_1') . '</th>';
         if($_SESSION['config']['double_validation_conges']) {
-            $childTable .= '<th>' . _('admin_groupes_double_valid') . '</th>';
+            $childThead .= '<th>' . _('admin_groupes_double_valid') . '</th>';
         }
-        $childTable .= '</tr></thead><tbody>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         $ReqLog1 = \includes\SQL::query($sql1);
         while ($resultat1 = $ReqLog1->fetch_array()) {
@@ -2470,25 +2493,26 @@ class Fonctions
             'table-striped',
             'table-condensed'
         ]);
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
-        $childTable .= '<th>' . _('divers_nom_maj_1') . '</th>';
-        $childTable .= '<th>' . _('divers_prenom_maj_1') . '</th>';
-        $childTable .= '<th>' . _('divers_login_maj_1') . '</th>';
-        $childTable .= '<th>' . _('divers_quotite_maj_1') . '</th>';
-        $childTable .= '<th>' . _('admin_users_is_resp') . '</th>';
-        $childTable .= '<th>' . _('admin_users_resp_login') . '</th>';
-        $childTable .= '<th>' . _('admin_users_is_admin') . '</th>';
-        $childTable .= '<th>' . _('admin_users_is_hr') . '</th>';
-        $childTable .= '<th>' . _('admin_users_is_active') . '</th>';
-        $childTable .= '<th>' . _('admin_users_see_all') . '</th>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th>' . _('divers_nom_maj_1') . '</th>';
+        $childThead .= '<th>' . _('divers_prenom_maj_1') . '</th>';
+        $childThead .= '<th>' . _('divers_login_maj_1') . '</th>';
+        $childThead .= '<th>' . _('divers_quotite_maj_1') . '</th>';
+        $childThead .= '<th>' . _('admin_users_is_resp') . '</th>';
+        $childThead .= '<th>' . _('admin_users_resp_login') . '</th>';
+        $childThead .= '<th>' . _('admin_users_is_admin') . '</th>';
+        $childThead .= '<th>' . _('admin_users_is_hr') . '</th>';
+        $childThead .= '<th>' . _('admin_users_is_active') . '</th>';
+        $childThead .= '<th>' . _('admin_users_see_all') . '</th>';
 
         if($_SESSION['config']['where_to_find_user_email']=="dbconges") {
-            $childTable .= '<th>' . _('admin_users_mail') . '</th>';
+            $childThead .= '<th>' . _('admin_users_mail') . '</th>';
         }
-        $childTable .= '</tr>';
-        $childTable .= '</thead>';
-        $childTable .= '<tbody>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         // AFICHAGE DE LA LIGNE DES VALEURS ACTUELLES A MOFIDIER
         $childTable .= '<tr>';
@@ -2599,15 +2623,18 @@ class Fonctions
             'table-striped',
             'table-condensed'
         ]);
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
-        $childTable .= '<th></th>';
-        $childTable .= '<th colspan="2">' . _('admin_modif_nb_jours_an') . ' </th>';
-        $childTable .= '<th colspan="2">' . _('divers_solde') . '</th>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th></th>';
+        $childThead .= '<th colspan="2">' . _('admin_modif_nb_jours_an') . ' </th>';
+        $childThead .= '<th colspan="2">' . _('divers_solde') . '</th>';
         if( $_SESSION['config']['autorise_reliquats_exercice'] ) {
-            $childTable .= '<th colspan="2">' . _('divers_reliquat') . '</th>';
+            $childThead .= '<th colspan="2">' . _('divers_reliquat') . '</th>';
         }
-        $childTable .= '</tr></thead><tbody>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         $i = true;
         foreach($tab_type_conges as $id_type_cong => $libelle) {
@@ -2818,14 +2845,17 @@ class Fonctions
             'table-striped',
             'table-condensed'
         ]);
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
-        $childTable .= '<th><b>' . _('admin_groupes_groupe') . '</b></th>';
-        $childTable .= '<th><b>' . _('admin_groupes_libelle') . ' / ' . _('divers_comment_maj_1') . '</b></th>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th><b>' . _('admin_groupes_groupe') . '</b></th>';
+        $childThead .= '<th><b>' . _('admin_groupes_libelle') . ' / ' . _('divers_comment_maj_1') . '</b></th>';
         if($_SESSION['config']['double_validation_conges']) {
-            $childTable .= '<th><b>' . _('admin_groupes_double_valid') . '</b></th>';
+            $childThead .= '<th><b>' . _('admin_groupes_double_valid') . '</b></th>';
         }
-        $childTable .= '</tr></thead><tbody><tr>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody><tr>';
         while ($resultat1 = $ReqLog1->fetch_array()) {
             $sql_groupname=$resultat1["g_groupename"];
             $sql_comment=$resultat1["g_comment"];
@@ -2938,14 +2968,15 @@ class Fonctions
             'table-striped',
             'table-condensed'
         ]);
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
-        $childTable .= '<th>' . _('divers_login_maj_1') . '</th>';
-        $childTable .= '<th>'. _('divers_nom_maj_1') . '</th>';
-        $childTable .= '<th>' . _('divers_prenom_maj_1') . '</th>';
-        $childTable .= '</tr>';
-        $childTable .= '</thead>';
-        $childTable .= '<tbody>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th>' . _('divers_login_maj_1') . '</th>';
+        $childThead .= '<th>'. _('divers_nom_maj_1') . '</th>';
+        $childThead .= '<th>' . _('divers_prenom_maj_1') . '</th>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         // Récupération des informations
         $sql1 = 'SELECT u_login, u_nom, u_prenom FROM conges_users WHERE u_login = "'. \includes\SQL::quote($u_login).'"';
@@ -3066,18 +3097,19 @@ class Fonctions
         ]);
 
         // affichage TITRE
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
-        $childTable .= '<th colspan=3><h3>' . _('admin_gestion_groupe_users_group_of_new_user') . ' :</h3></th>';
-        $childTable .= '</tr>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th colspan=3><h3>' . _('admin_gestion_groupe_users_group_of_new_user') . ' :</h3></th>';
+        $childThead .= '</tr>';
 
-        $childTable .= '<tr>';
-        $childTable .= '<th>&nbsp;</th>';
-        $childTable .= '<th>&nbsp;' . _('admin_groupes_groupe') . '&nbsp;:</th>';
-        $childTable .= '<th>&nbsp;' . _('admin_groupes_libelle') . '&nbsp;:</th>';
-        $childTable .= '</tr>';
-        $childTable .= '</thead>';
-        $childTable .= '<tbody>';
+        $childThead .= '<tr>';
+        $childThead .= '<th>&nbsp;</th>';
+        $childThead .= '<th>&nbsp;' . _('admin_groupes_groupe') . '&nbsp;:</th>';
+        $childThead .= '<th>&nbsp;' . _('admin_groupes_libelle') . '&nbsp;:</th>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         // affichage des groupes
 
@@ -3170,29 +3202,32 @@ class Fonctions
             'table-striped',
             'table-condensed'
         ]);
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
         if ($_SESSION['config']['export_users_from_ldap'] ) {
-            $childTable .= '<th>' . _('divers_nom_maj_1') . ' ' . _('divers_prenom_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_nom_maj_1') . ' ' . _('divers_prenom_maj_1') . '</th>';
         } else {
-            $childTable .= '<th>' . _('divers_login_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_nom_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_prenom_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_login_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_nom_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_prenom_maj_1') . '</th>';
         }
-        $childTable .= '<th>' . _('divers_quotite_maj_1') . '</th>';
-        $childTable .= '<th>' . _('admin_new_users_is_resp') . '</th>';
-        $childTable .= '<th>' . _('divers_responsable_maj_1') . '</th>';
-        $childTable .= '<th>' . _('admin_new_users_is_admin') . '</th>';
-        $childTable .= '<th>' . _('admin_new_users_is_hr') . '</th>';
-        $childTable .= '<th>' . _('admin_new_users_see_all') . '</th>';
+        $childThead .= '<th>' . _('divers_quotite_maj_1') . '</th>';
+        $childThead .= '<th>' . _('admin_new_users_is_resp') . '</th>';
+        $childThead .= '<th>' . _('divers_responsable_maj_1') . '</th>';
+        $childThead .= '<th>' . _('admin_new_users_is_admin') . '</th>';
+        $childThead .= '<th>' . _('admin_new_users_is_hr') . '</th>';
+        $childThead .= '<th>' . _('admin_new_users_see_all') . '</th>';
         if ( !$_SESSION['config']['export_users_from_ldap'] ) {
-            $childTable .= '<th>' . _('admin_users_mail') . '</th>';
+            $childThead .= '<th>' . _('admin_users_mail') . '</th>';
         }
         if ($_SESSION['config']['how_to_connect_user'] == "dbconges") {
-            $childTable .= '<th>' . _('admin_new_users_password') . '</th>';
-            $childTable .= '<th>' . _('admin_new_users_password') . '</th>';
+            $childThead .= '<th>' . _('admin_new_users_password') . '</th>';
+            $childThead .= '<th>' . _('admin_new_users_password') . '</th>';
         }
-        $childTable .= '</tr></thead><tbody>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         $text_nom="<input class=\"form-control\" type=\"text\" name=\"new_nom\" size=\"10\" maxlength=\"30\" value=\"".$tab_new_user['nom']."\">" ;
         $text_prenom="<input class=\"form-control\" type=\"text\" name=\"new_prenom\" size=\"10\" maxlength=\"30\" value=\"".$tab_new_user['prenom']."\">" ;
@@ -3295,14 +3330,15 @@ class Fonctions
             'table-condensed'
         ]);
         // ligne de titres
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
-        $childTable .= '<th></th>';
-        $childTable .= '<th>' . _('admin_new_users_nb_par_an') . '</th>';
-        $childTable .= '<th>' . _('divers_solde') . '</th>';
-        $childTable .= '</tr>';
-        $childTable .= '</thead>';
-        $childTable .= '<tbody>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th></th>';
+        $childThead .= '<th>' . _('admin_new_users_nb_par_an') . '</th>';
+        $childThead .= '<th>' . _('divers_solde') . '</th>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         $i = true;
         // ligne de saisie des valeurs
@@ -3706,19 +3742,23 @@ class Fonctions
         $tableImpaire->addClasses([
             'tablo',
         ]);
-        $childImpaireTable = '<thead><tr><td></td>';
-        $childImpaireTable .= '<td class="histo">'. _('lundi') .'</td>';
-        $childImpaireTable .= '<td class="histo">'. _('mardi') .'</td>';
-        $childImpaireTable .= '<td class="histo">'. _('mercredi') .'</td>';
-        $childImpaireTable .= '<td class="histo">'. _('jeudi') .'</td>';
-        $childImpaireTable .= '<td class="histo">'. _('vendredi') .'</td>';
+        $theadImpaire = new \App\Libraries\Structure\Table\Thead();
+        $childTheadImpaire = '<tr><td></td>';
+        $childTheadImpaire .= '<td class="histo">'. _('lundi') .'</td>';
+        $childTheadImpaire .= '<td class="histo">'. _('mardi') .'</td>';
+        $childTheadImpaire .= '<td class="histo">'. _('mercredi') .'</td>';
+        $childTheadImpaire .= '<td class="histo">'. _('jeudi') .'</td>';
+        $childTheadImpaire .= '<td class="histo">'. _('vendredi') .'</td>';
         if($_SESSION['config']['samedi_travail']) {
-            $childImpaireTable .= '<td class="histo">'. _('samedi') .'</td>';
+            $childTheadImpaire .= '<td class="histo">'. _('samedi') .'</td>';
         }
         if($_SESSION['config']['dimanche_travail']) {
-            $childImpaireTable .= '<td class="histo">'. _('dimanche') .'</td>';
+            $childTheadImpaire .= '<td class="histo">'. _('dimanche') .'</td>';
         }
-        $childImpaireTable .= '</tr></thead><tbody>';
+        $childTheadImpaire .= '</tr>';
+        $theadImpaire->addChild($childTheadImpaire);
+        $tableImpaire->addChild($theadImpaire);
+        $childImpaireTable = '<tbody>';
         $childImpaireTable .= '<tr align="center">';
         $childImpaireTable .= '<td class="histo">'. _('admin_temps_partiel_am') .'</td>';
         $childImpaireTable .= '<td class="histo">' . $imp_lu_am . '</td>';
@@ -3776,19 +3816,23 @@ class Fonctions
         $tablePaire->addClasses([
             'tablo',
         ]);
-        $childPaireTable = '<thead><tr><td></td>';
-        $childPaireTable .= '<td class="histo">'. _('lundi') .'</td>';
-        $childPaireTable .= '<td class="histo">'. _('mardi') .'</td>';
-        $childPaireTable .= '<td class="histo">'. _('mercredi') .'</td>';
-        $childPaireTable .= '<td class="histo">'. _('jeudi') .'</td>';
-        $childPaireTable .= '<td class="histo">'. _('vendredi') .'</td>';
+        $theadPaire = new \App\Libraries\Structure\Table\Thead();
+        $childTheadPaire = '<tr><td></td>';
+        $childTheadPaire .= '<td class="histo">'. _('lundi') .'</td>';
+        $childTheadPaire .= '<td class="histo">'. _('mardi') .'</td>';
+        $childTheadPaire .= '<td class="histo">'. _('mercredi') .'</td>';
+        $childTheadPaire .= '<td class="histo">'. _('jeudi') .'</td>';
+        $childTheadPaire .= '<td class="histo">'. _('vendredi') .'</td>';
         if($_SESSION['config']['samedi_travail']) {
-            $childPaireTable .= '<td class="histo">'. _('samedi') .'</td>';
+            $childTheadPaire .= '<td class="histo">'. _('samedi') .'</td>';
         }
         if($_SESSION['config']['dimanche_travail']) {
-            $childPaireTable .= '<td class="histo">'. _('dimanche') .'</td>';
+            $childTheadPaire .= '<td class="histo">'. _('dimanche') .'</td>';
         }
-        $childPaireTable .= '</tr></thead><tbody>';
+        $childTheadPaire .= '</tr>';
+        $theadPaire->addChild($childTheadPaire);
+        $tablePaire->addChild($theadPaire);
+        $childPaireTable = '<tbody>';
         $childPaireTable .= '<tr align="center">';
         $childPaireTable .= '<td class="histo">'. _('admin_temps_partiel_am') .'</td>';
         $childPaireTable .= '<td class="histo">' . $p_lu_am . '</td>';
