@@ -9,14 +9,12 @@ use \App\Libraries\Interfaces;
  * @since  1.9
  * @author Prytoegrian <prytoegrian@protonmail.com>
  */
-abstract class HtmlElement implements Interfaces\IHtmlElement
+abstract class AHtmlElement implements Interfaces\IHtmlElement
 {
     /**
      * Classes applicables sur l'élément
      *
      * @var array
-     *
-     * @access protected
      */
     protected $classes = [];
 
@@ -24,8 +22,6 @@ abstract class HtmlElement implements Interfaces\IHtmlElement
      * Attributs divers de l'élément
      *
      * @var array
-     *
-     * @access protected
      */
     protected $attributes = [];
 
@@ -33,13 +29,11 @@ abstract class HtmlElement implements Interfaces\IHtmlElement
      * Id unique de l'élément html
      *
      * @var string
-     *
-     * @access protected
      */
     protected $id = '';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      * @see Interfaces\IHtmlElement
      */
     public function addClass($class)
@@ -50,7 +44,7 @@ abstract class HtmlElement implements Interfaces\IHtmlElement
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      * @see Interfaces\IHtmlElement
      */
     public function addClasses(array $classes)
@@ -61,7 +55,7 @@ abstract class HtmlElement implements Interfaces\IHtmlElement
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      * @see Interfaces\IHtmlElement
      */
     public function addAttribute($name, $value)
@@ -79,7 +73,7 @@ abstract class HtmlElement implements Interfaces\IHtmlElement
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      * @see Interfaces\IHtmlElement
      */
     public function getId()
@@ -91,7 +85,7 @@ abstract class HtmlElement implements Interfaces\IHtmlElement
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      * @see Interfaces\IHtmlElement
      */
     public function setId($id)
@@ -100,7 +94,7 @@ abstract class HtmlElement implements Interfaces\IHtmlElement
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      * @see Interfaces\IRenderable
      */
     public abstract function render();

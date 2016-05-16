@@ -16,7 +16,6 @@ class Table extends \Tests\Units\TestUnit
      * Test du render d'une table avec un fils non renderable
      *
      * @return void
-     * @access public
      * @since 1.9
      */
     public function testRenderWithoutRenderable()
@@ -33,10 +32,9 @@ class Table extends \Tests\Units\TestUnit
      * Test du render d'une table avec un fils renderable
      *
      * @return void
-     * @access public
      * @since 1.9
      */
-    public function testRenderWithRenderable()
+    public function testRenderWithChildRenderable()
     {
         $table = new _Table();
         $child = new \Mock\App\Libraries\Structure\Table();
@@ -48,5 +46,60 @@ class Table extends \Tests\Units\TestUnit
                     ->call('render')
                         ->once();
         });
+    }
+
+    /**
+     * Test du render d'une table avec un thead
+     *
+     * @return void
+     * @since 1.9
+     */
+    public function testRenderWithThead()
+    {
+        $table = new _Table();
+        $thead = new \Mock\App\Libraries\Structure\Table\Thead();
+        $table->addChild($thead);
+
+        $this->output(function () use ($table, $thead) {
+            $this->when($table->render())
+                ->mock($thead)
+                    ->call('render')
+                        ->once();
+        });
+    }
+
+    /**
+     * Test de l'ajout de deux thead
+     *
+     * @return void
+     * @since 1.9
+     */
+    public function testAddTwoThead()
+    {
+        $table  = new _Table();
+        $thead1 = new \Mock\App\Libraries\Structure\Table\Thead();
+        $thead2 = new \Mock\App\Libraries\Structure\Table\Thead();
+        $table->addChild($thead1);
+
+        $this->exception(function () use ($table, $thead2) {
+            $table->addChild($thead2);
+        })->isInstanceOf('\LogicException');
+    }
+
+    /**
+     * Test d'ajouts multiples d'enfants
+     *
+     * @return void
+     * @since 1.9
+     */
+    public function testAddChildren()
+    {
+        $table = new \Mock\App\Libraries\Structure\Table();
+        $child = 'child';
+
+        $this->when($table->addChildren([$child]))
+            ->mock($table)
+                ->call('addChild')
+                    ->once();
     }
 }

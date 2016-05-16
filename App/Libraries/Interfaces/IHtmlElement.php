@@ -65,6 +65,8 @@ interface IHtmlElement extends IRenderable
     /**
      * Force l'id unique de l'élément
      *
+     * @param string $id
+     *
      * @return void
      * @since 1.9
      */

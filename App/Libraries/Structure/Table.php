@@ -2,6 +2,7 @@
 namespace App\Libraries\Structure;
 
 use \App\Libraries\Interfaces;
+use \App\Libraries\Structure\Table\Thead;
 
 /**
  * Table html
@@ -10,19 +11,26 @@ use \App\Libraries\Interfaces;
  * @author Prytoegrian <prytoegrian@protonmail.com>
  * @see    \Tests\Units\App\Libraries\Structure\Table
  */
-class Table extends HtmlElement implements Interfaces\IHeritable
+class Table extends AHtmlElement implements Interfaces\IHeritable
 {
     /**
      * Liste d'enfants de la table
      *
      * @var array
-     *
-     * @access protected
+     * @TODO : à virer dès qu'il n'y a plus autre chose que thead, tfoot, tbody et tr d'injecté
+     * autrement dit quand addChild ne fera plus de $this->children[] = $var
      */
     private $children = [];
 
     /**
-     * @inheritdoc
+     * Section thead du tableau
+     *
+     * @var Thead
+     */
+    private $thead;
+
+    /**
+     * {@inheritdoc}
      * @see Interfaces\IRenderable
      */
     public function render()
@@ -31,8 +39,11 @@ class Table extends HtmlElement implements Interfaces\IHeritable
         $this->renderClasses();
         $this->renderAttributes();
         echo '>';
+        if ($this->thead instanceof Interfaces\IRenderable) {
+            $this->thead->render();
+        }
         foreach ($this->children as $child) {
-            if ($child instanceOf Interfaces\IRenderable) {
+            if ($child instanceof Interfaces\IRenderable) {
                 $child->render();
             } else {
                 /* 1.9 TODO: On peut ajouter n'importe quel fils quitte à faire n'importe quoi,
@@ -45,16 +56,7 @@ class Table extends HtmlElement implements Interfaces\IHeritable
     }
 
     /**
-     * @inheritdoc
-     * @see Interfaces\IHeritable
-     */
-    public function addChild($child)
-    {
-        $this->children[] = $child;
-    }
-
-    /**
-     * @inheritdoc
+     * {@inheritdoc}
      * @see Interfaces\IHeritable
      */
     public function addChildren(array $children)
@@ -63,4 +65,39 @@ class Table extends HtmlElement implements Interfaces\IHeritable
             $this->addChild($child);
         }
     }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @see Interfaces\IHeritable
+     */
+    public function addChild($child)
+    {
+        if ($child instanceof Thead) {
+            $this->setHead($child);
+        } else {
+            $this->children[] = $child;
+        }
+
+    }
+
+    /**
+     * Définit le groupement thead de la table
+     *
+     * @param Thead $thead
+     *
+     * @return void
+     * @throws \LogicException si l'on ajoute plus d'un thead
+     */
+    private function setHead(Thead $thead)
+    {
+        if (!empty($this->thead)) {
+            throw new \LogicException('Un thead maximum');
+        }
+        $this->thead = $thead;
+    }
+
+/*
+ * TODO: Avoir un collecteur tr, et on render les tr directement s'il n'y a pas thead, tbody, tfoot...
+ */
 }
