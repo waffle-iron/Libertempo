@@ -1030,7 +1030,7 @@ class Fonctions
             'table-condensed',
         ]);
         $childTable = '<tr align="center">';
-        $childTable .= '<td bgcolor="#FFFFFF" class="cal-legende">adzef - </td>';
+        $childTable .= '<td bgcolor="#FFFFFF" class="cal-legende"> - </td>';
         $childTable .= '<td class="cal-legende"> </td>';
         $childTable .= '</tr>';
         $childTable .= '<tr align="center">';
