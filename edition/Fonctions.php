@@ -37,16 +37,20 @@ class Fonctions
                 'table-condensed',
                 'table-striped',
             ]);
-            $childTable = '<thead><tr align="center">';
-            $childTable .= '<th>' . _('editions_numero') . '</th>';
-            $childTable .= '<th>' . _('editions_date') . '</th>';
+            $thead = new \App\Libraries\Structure\Table\Thead();
+            $childThead = '<tr align="center">';
+            $childThead .= '<th>' . _('editions_numero') . '</th>';
+            $childThead .= '<th>' . _('editions_date') . '</th>';
             foreach($tab_type_cong as $id_abs => $libelle) {
-                $childTable .= '<th>' . _('divers_solde_maj_1') . ' ' . $libelle . '</th>';
+                $childThead .= '<th>' . _('divers_solde_maj_1') . ' ' . $libelle . '</th>';
             }
 
-            $childTable .= '<th></th>';
-            $childTable .= '<th></th>';
-            $childTable .= '</tr></thead><tbody>';
+            $childThead .= '<th></th>';
+            $childThead .= '<th></th>';
+            $childThead .= '</tr>';
+            $thead->addChild($childThead);
+            $table->addChild($thead);
+            $childTable = '<tbody>';
 
             foreach($tab_editions_user as $id_edition => $tab_ed) {
                 //$text_edit_a_nouveau="<a href=\"edition_papier.php?session=$session&user_login=$login&edit_id=$sql_id\">Editer à nouveau</a>" ;
@@ -118,17 +122,21 @@ class Fonctions
                 'table-condensed',
                 'table-striped',
             ]);
-            $childTable = '<thead><tr align="center">';
-            $childTable .= '<th>' . _('divers_type_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_etat_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_nb_jours_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_debut_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_fin_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_comment_maj_1') . '</th>';
+            $thead = new \App\Libraries\Structure\Table\Thead();
+            $childThead = '<tr align="center">';
+            $childThead .= '<th>' . _('divers_type_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_etat_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_nb_jours_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_debut_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_fin_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_comment_maj_1') . '</th>';
             if($_SESSION['config']['affiche_date_traitement']) {
-                $childTable .= '<th>' . _('divers_date_traitement') . '</td>';
+                $childThead .= '<th>' . _('divers_date_traitement') . '</td>';
             }
-            $childTable .= '</tr></thead></tbody>';
+            $childThead .= '</tr>';
+            $thead->addChild($childThead);
+            $table->addChild($thead);
+            $childTable = '</tbody>';
 
             while ($resultat2 = $ReqLog2->fetch_array()) {
                 $sql_p_date_deb = eng_date_to_fr($resultat2["p_date_deb"]);
@@ -282,11 +290,15 @@ class Fonctions
         $return = '';
         $table = new \App\Libraries\Structure\Table();
         $table->addAttribute('width', 250);
-        $childTable = '<thead><tr>';
-        $childTable .= '<th></th>';
-        $childTable .= '<th>' . _('editions_jours_an') . '</th>';
-        $childTable .= '<th>' . _('divers_solde_maj') . '</th>';
-        $childTable .= '</tr></thead><tbody>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th></th>';
+        $childThead .= '<th>' . _('editions_jours_an') . '</th>';
+        $childThead .= '<th>' . _('divers_solde_maj') . '</th>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         foreach($tab_type_cong as $id_abs => $libelle) {
             $childTable .= '<tr><td>' . $libelle . '</td><td>' . $tab_info_user['conges'][$libelle]['nb_an']. '</td><td align="center" bgcolor="#FF9191"><b>' . $tab_info_edition['conges'][$id_abs] . '</b></td>';

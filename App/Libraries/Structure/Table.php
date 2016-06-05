@@ -98,6 +98,7 @@ class Table extends AHtmlElement implements Interfaces\IHeritable
     }
 
 /*
- * TODO: Avoir un collecteur tr, et on render les tr directement s'il n'y a pas thead, tbody, tfoot...
+ * TODO: la spec HTML5 définit que l'on peut avoir soit un format complet (groupes thead, tbody, tfoot) soit une syntaxe courte avec seulement des tr.
+ * Il faut donc mettre cette classe en abstraite et avoir deux fils implémentant ce fait
  */
 }
