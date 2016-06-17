@@ -280,13 +280,15 @@ class Fonctions
             'table-condensed',
             'table-striped'
         ]);
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
-        $childTable .= '<th colspan="2">' . _('resp_ajout_conges_nb_jours_all_1') . ' ' . _('resp_ajout_conges_nb_jours_all_2') . '</th>';
-        $childTable .= '<th>' ._('resp_ajout_conges_calcul_prop') . '</th>';
-        $childTable .= '<th>' . _('divers_comment_maj_1') . '</th>';
-        $childTable .= '</tr>';
-        $childTable .= '</thead>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th colspan="2">' . _('resp_ajout_conges_nb_jours_all_1') . ' ' . _('resp_ajout_conges_nb_jours_all_2') . '</th>';
+        $childThead .= '<th>' ._('resp_ajout_conges_calcul_prop') . '</th>';
+        $childThead .= '<th>' . _('divers_comment_maj_1') . '</th>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
         foreach($tab_type_conges as $id_conges => $libelle) {
             $childTable .= '<tr>';
             $childTable .= '<td><strong>' . $libelle . '<strong></td>';
@@ -295,6 +297,7 @@ class Fonctions
             $childTable .= '<td><input class="form-control" type="text" name="tab_new_comment_all[' . $id_conges . ']" size="30" maxlength="200" value=""></td>';
             $childTable .= '</tr>';
         }
+        $childTable .= '</tbody>';
         $table->addChild($childTable);
         ob_start();
         $table->render();
@@ -336,25 +339,26 @@ class Fonctions
                 'table-condensed',
                 'table-striped'
             ]);
-            $childTable = '<thead>';
-            $childTable .= '<tr align="center">';
-            $childTable .= '<th>' . _('divers_nom_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_prenom_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_quotite_maj_1') . '</td>';
+            $thead = new \App\Libraries\Structure\Table\Thead();
+            $childThead = '<tr align="center">';
+            $childThead .= '<th>' . _('divers_nom_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_prenom_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_quotite_maj_1') . '</td>';
             foreach($tab_type_conges as $id_conges => $libelle) {
-                $childTable .= '<th>' . $libelle . '<br><i>(' . _('divers_solde') . ')</i></th>';
-                $childTable .= '<th>' . $libelle . '<br>' . _('resp_ajout_conges_nb_jours_ajout') . '</th>';
+                $childThead .= '<th>' . $libelle . '<br><i>(' . _('divers_solde') . ')</i></th>';
+                $childThead .= '<th>' . $libelle . '<br>' . _('resp_ajout_conges_nb_jours_ajout') . '</th>';
             }
             if ($_SESSION['config']['gestion_conges_exceptionnels']) {
                 foreach($tab_type_conges_exceptionnels as $id_conges => $libelle) {
-                    $childTable .= '<th>' . $libelle . '<br><i>(' . _('divers_solde') . ')</i></th>';
-                    $childTable .= '<th>' . $libelle . '<br>' . _('resp_ajout_conges_nb_jours_ajout') . '</th>';
+                    $childThead .= '<th>' . $libelle . '<br><i>(' . _('divers_solde') . ')</i></th>';
+                    $childThead .= '<th>' . $libelle . '<br>' . _('resp_ajout_conges_nb_jours_ajout') . '</th>';
                 }
             }
-            $childTable .= '<th>' . _('divers_comment_maj_1') . '<br></th>';
-            $childTable .= '</tr>';
-            $childTable .= '</thead>';
-            $childTable .= '<tbody>';
+            $childThead .= '<th>' . _('divers_comment_maj_1') . '<br></th>';
+            $childThead .= '</tr>';
+            $thead->addChild($childThead);
+            $table->addChild($thead);
+            $childTable = '<tbody>';
 
             // AFFICHAGE LIGNES TABLEAU
             $cpt_lignes=0 ;
@@ -899,37 +903,38 @@ class Fonctions
             'table-condensed',
             'table-striped'
         ]);
-        $childTable = '<thead>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
 
         $nb_colonnes = 0;
 
-        $childTable .= '<tr>';
-        $childTable .= '<th>' . _('divers_nom_maj') .'</th>';
-        $childTable .= '<th>'. _('divers_prenom_maj') .'</th>';
-        $childTable .= '<th>'. _('divers_quotite_maj_1') .'</th>' ;
+        $childThead = '<tr>';
+        $childThead .= '<th>' . _('divers_nom_maj') .'</th>';
+        $childThead .= '<th>'. _('divers_prenom_maj') .'</th>';
+        $childThead .= '<th>'. _('divers_quotite_maj_1') .'</th>' ;
         $nb_colonnes = 3;
         foreach($tab_type_cong as $id_conges => $libelle) {
             // cas d'une absence ou d'un congé
-            $childTable .= '<th>' . $libelle . ' / ' . _('divers_an_maj') . '</th>';
-            $childTable .= '<th>'. _('divers_solde_maj') . ' ' . $libelle . '</th>';
+            $childThead .= '<th>' . $libelle . ' / ' . _('divers_an_maj') . '</th>';
+            $childThead .= '<th>'. _('divers_solde_maj') . ' ' . $libelle . '</th>';
             $nb_colonnes += 2;
         }
         // conges exceptionnels
         if ($_SESSION['config']['gestion_conges_exceptionnels']) {
             foreach($tab_type_conges_exceptionnels as $id_type_cong => $libelle) {
-                $childTable .= '<th>'. _('divers_solde_maj') . ' ' . $libelle . '</th>';
+                $childThead .= '<th>'. _('divers_solde_maj') . ' ' . $libelle . '</th>';
                 $nb_colonnes += 1;
             }
         }
-        $childTable .= '<th></th>';
+        $childThead .= '<th></th>';
         $nb_colonnes += 1;
         if($_SESSION['config']['editions_papier']) {
-            $childTable .= '<th></th>';
+            $childThead .= '<th></th>';
             $nb_colonnes += 1;
         }
-        $childTable .= '</tr>';
-        $childTable .= '</thead>';
-        $childTable .= '<tbody>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         /***********************************/
         // AFFICHAGE USERS
@@ -1233,7 +1238,7 @@ class Fonctions
         $return .= '</ul>';
         $return .= '</div>';
 
-        $return .= '<h2>' . _('resp_traite_user_etat_conges') . $year_affichage . '</h2>';
+        $return .= '<h2>' . _('resp_traite_user_etat_conges') . ' ' . $year_affichage . '</h2>';
 
         // Récupération des informations de speriodes de conges/absences
         $sql3 = "SELECT p_login, p_date_deb, p_demi_jour_deb, p_date_fin, p_demi_jour_fin, p_nb_jours, p_commentaire, p_type, p_etat, p_motif_refus, p_date_demande, p_date_traitement, p_num FROM conges_periode " .
@@ -1266,24 +1271,25 @@ class Fonctions
                 'table-condensed',
                 'table-striped'
             ]);
-            $childTable = '<thead>';
-            $childTable .= '<tr align="center">';
-            $childTable .= '<th>';
-            $childTable .= _('divers_debut_maj_1');
-            $childTable .= '</th>';
-            $childTable .= '<th>' . _('divers_fin_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_nb_jours_pris_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_comment_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_type_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_etat_maj_1') . '</th>';
-            $childTable .= '<th>' . _('resp_traite_user_annul') . '</th>';
-            $childTable .= '<th>' . _('resp_traite_user_motif_annul') . '</th>';
+            $thead = new \App\Libraries\Structure\Table\Thead();
+            $childThead = '<tr align="center">';
+            $childThead .= '<th>';
+            $childThead .= _('divers_debut_maj_1');
+            $childThead .= '</th>';
+            $childThead .= '<th>' . _('divers_fin_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_nb_jours_pris_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_comment_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_type_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_etat_maj_1') . '</th>';
+            $childThead .= '<th>' . _('resp_traite_user_annul') . '</th>';
+            $childThead .= '<th>' . _('resp_traite_user_motif_annul') . '</th>';
             if($_SESSION['config']['affiche_date_traitement']) {
-                $childTable .= '<th>' . _('divers_date_traitement') . '</th>';
+                $childThead .= '<th>' . _('divers_date_traitement') . '</th>';
             }
-            $childTable .= '</tr>';
-            $childTable .= '</thead>';
-            $childTable .= '<tbody>';
+            $childThead .= '</tr>';
+            $thead->addChild($childThead);
+            $table->addChild($thead);
+            $childTable = '<tbody>';
             $tab_checkbox=array();
             $i = true;
             while ($resultat3 = $ReqLog3->fetch_array()) {
@@ -1402,22 +1408,23 @@ class Fonctions
                 'table-condensed',
                 'table-striped',
             ]);
-            $childTable = '<thead>';
-            $childTable .= '<tr align="center">';
-            $childTable .= '<th>' . _('divers_debut_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_fin_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_nb_jours_pris_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_comment_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_type_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_accepter_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_refuser_maj_1') . '</th>';
-            $childTable .= '<th>' . _('resp_traite_user_motif_refus') . '</th>';
+            $thead = new \App\Libraries\Structure\Table\Thead();
+            $childThead = '<tr align="center">';
+            $childThead .= '<th>' . _('divers_debut_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_fin_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_nb_jours_pris_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_comment_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_type_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_accepter_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_refuser_maj_1') . '</th>';
+            $childThead .= '<th>' . _('resp_traite_user_motif_refus') . '</th>';
             if($_SESSION['config']['affiche_date_traitement']) {
-                $childTable .= '<th>' . _('divers_date_traitement') . '</th>';
+                $childThead .= '<th>' . _('divers_date_traitement') . '</th>';
             }
-            $childTable .= '</tr>';
-            $childTable .= '</thead>';
-            $childTable .= '<tbody>';
+            $childThead .= '</tr>';
+            $thead->addChild($childThead);
+            $table->addChild($thead);
+            $childTable = '<tbody>';
 
             $i = true;
             $tab_checkbox=array();
@@ -1954,15 +1961,15 @@ class Fonctions
                     'table-condensed',
                     'table-striped'
                 ]);
-                $childTable = '<thead>';
-                $childTable .= '<tr>';
-                $childTable .= '<th>' . _('divers_nom_maj_1') . '<br>' . _('divers_prenom_maj_1') . '</th>';
-                $childTable .= '<th>' . _('divers_quotite_maj_1') . '</th>';
-                $childTable .= '<th>' . _('divers_type_maj_1') . '</th>';
-                $childTable .= '<th>' . _('divers_debut_maj_1') . '</th>';
-                $childTable .= '<th>' . _('divers_fin_maj_1') . '</th>' ;
-                $childTable .= '<th>' . _('divers_comment_maj_1') . '</th>';
-                $childTable .= '<th>' . _('resp_traite_demandes_nb_jours') . '</th>';
+                $thead = new \App\Libraries\Structure\Table\Thead();
+                $childThead = '<tr>';
+                $childThead .= '<th>' . _('divers_nom_maj_1') . '<br>' . _('divers_prenom_maj_1') . '</th>';
+                $childThead .= '<th>' . _('divers_quotite_maj_1') . '</th>';
+                $childThead .= '<th>' . _('divers_type_maj_1') . '</th>';
+                $childThead .= '<th>' . _('divers_debut_maj_1') . '</th>';
+                $childThead .= '<th>' . _('divers_fin_maj_1') . '</th>' ;
+                $childThead .= '<th>' . _('divers_comment_maj_1') . '</th>';
+                $childThead .= '<th>' . _('resp_traite_demandes_nb_jours') . '</th>';
                 // foreach($tab_type_conges as $id_conges => $libelle)
                 // {
                 // 	echo "<th>". _('divers_solde_maj_1') ."<br>$libelle</th>" ;
@@ -1972,17 +1979,18 @@ class Fonctions
                 // {
                 // 	echo "<th>". _('divers_solde_maj_1') ."<br>$libelle</th>" ;
                 // }
-                $childTable .= '<th>' . _('divers_solde') . '</th>';
-                $childTable .= '<th>' . _('divers_accepter_maj_1') . '</th>';
-                $childTable .= '<th>' . _('divers_refuser_maj_1') . '</th>';
-                $childTable .= '<th>' . _('resp_traite_demandes_attente') . '</th>' ;
-                $childTable .= '<th>' . _('resp_traite_demandes_motif_refus') . '</th>';
+                $childThead .= '<th>' . _('divers_solde') . '</th>';
+                $childThead .= '<th>' . _('divers_accepter_maj_1') . '</th>';
+                $childThead .= '<th>' . _('divers_refuser_maj_1') . '</th>';
+                $childThead .= '<th>' . _('resp_traite_demandes_attente') . '</th>' ;
+                $childThead .= '<th>' . _('resp_traite_demandes_motif_refus') . '</th>';
                 if($_SESSION['config']['affiche_date_traitement']) {
-                    $childTable .= '<th>' . _('divers_date_traitement') . '</th>';
+                    $childThead .= '<th>' . _('divers_date_traitement') . '</th>';
                 }
-                $childTable .= '</tr>';
-                $childTable .= '</thead>';
-                $childTable .= '<tbody>';
+                $childThead .= '</tr>';
+                $thead->addChild($childThead);
+                $table->addChild($thead);
+                $childTable = '<tbody>';
 
                 $i = true;
                 $tab_bt_radio=array();
@@ -2096,28 +2104,29 @@ class Fonctions
                         'table-condensed',
                         'table-striped'
                     ]);
-                    $childTable = '<thead>';
-                    $childTable .= '<tr>';
-                    $childTable .= '<th><b>' . _('divers_nom_maj_1') . '</b><br>' . _('divers_prenom_maj_1') . '</th>';
-                    $childTable .= '<th>' . _('divers_quotite_maj_1') . '</th>';
-                    $childTable .= '<th>' . _('divers_debut_maj_1') . '</th>';
-                    $childTable .= '<th>' . _('divers_fin_maj_1') . '</th>';
-                    $childTable .= '<th>' . _('divers_comment_maj_1') . '</th>';
-                    $childTable .= '<th>' . _('resp_traite_demandes_nb_jours') . '</th>';
+                    $thead = new \App\Libraries\Structure\Table\Thead();
+                    $childThead .= '<tr>';
+                    $childThead .= '<th><b>' . _('divers_nom_maj_1') . '</b><br>' . _('divers_prenom_maj_1') . '</th>';
+                    $childThead .= '<th>' . _('divers_quotite_maj_1') . '</th>';
+                    $childThead .= '<th>' . _('divers_debut_maj_1') . '</th>';
+                    $childThead .= '<th>' . _('divers_fin_maj_1') . '</th>';
+                    $childThead .= '<th>' . _('divers_comment_maj_1') . '</th>';
+                    $childThead .= '<th>' . _('resp_traite_demandes_nb_jours') . '</th>';
                     foreach($tab_type_conges as $id_conges => $libelle) {
-                        $childTable .= '<th>' . _('divers_solde_maj_1') . '<br>' . $libelle . '</th>';
+                        $childThead .= '<th>' . _('divers_solde_maj_1') . '<br>' . $libelle . '</th>';
                     }
-                    $childTable .= '<th>' . _('divers_type_maj_1') . '</th>';
-                    $childTable .= '<th>' . _('divers_accepter_maj_1') . '</th>';
-                    $childTable .= '<th>' . _('divers_refuser_maj_1') . '</th>';
-                    $childTable .= '<th>' . _('resp_traite_demandes_attente') . '</th>';
-                    $childTable .= '<th>' . _('resp_traite_demandes_motif_refus') . '</th>';
+                    $childThead .= '<th>' . _('divers_type_maj_1') . '</th>';
+                    $childThead .= '<th>' . _('divers_accepter_maj_1') . '</th>';
+                    $childThead .= '<th>' . _('divers_refuser_maj_1') . '</th>';
+                    $childThead .= '<th>' . _('resp_traite_demandes_attente') . '</th>';
+                    $childThead .= '<th>' . _('resp_traite_demandes_motif_refus') . '</th>';
                     if($_SESSION['config']['affiche_date_traitement']) {
-                        $childTable .= '<th>' . _('divers_date_traitement') . '</th>';
+                        $childThead .= '<th>' . _('divers_date_traitement') . '</th>';
                     }
-                    $childTable .= '</tr>';
-                    $childTable .= '</thead>';
-                    $childTable .= '<tbody>';
+                    $childThead .= '</tr>';
+                    $thead->addChild($childThead);
+                    $table->addChild($thead);
+                    $childTable = '<tbody>';
 
                     $i = true;
                     $tab_bt_radio=array();
