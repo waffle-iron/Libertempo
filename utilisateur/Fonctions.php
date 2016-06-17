@@ -251,16 +251,17 @@ class Fonctions
             'table-condensed',
             'table-striped',
         ]);
-        $childTable = '<thead>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
         // affichage première ligne : titres
-        $childTable .= '<tr>';
-        $childTable .= '<td>' . _('divers_debut_maj_1') . '</td>';
-        $childTable .= '<td>' . _('divers_fin_maj_1') . '</td>';
-        $childTable .= '<td>' . _('divers_nb_jours_maj_1') . '</td>';
-        $childTable .= '<td>' . _('divers_comment_maj_1') . '</td>';
-        $childTable .= '</tr>';
-        $childTable .= '</thead>';
-        $childTable .= '<tbody>';
+        $childThead = '<tr>';
+        $childThead .= '<th>' . _('divers_debut_maj_1') . '</th>';
+        $childThead .= '<th>' . _('divers_fin_maj_1') . '</th>';
+        $childThead .= '<th>' . _('divers_nb_jours_maj_1') . '</th>';
+        $childThead .= '<th>' . _('divers_comment_maj_1') . '</th>';
+        $childThead .= '</tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
         // affichage 2ieme ligne : valeurs actuelles
         $childTable .= '<tr>';
         while ($resultat1 = $ReqLog1->fetch_array()) {
@@ -452,17 +453,18 @@ class Fonctions
             'table-condensed',
             'table-striped',
         ]);
-        $childTable = '<thead>';
-        $childTable .= '<tr>';
-        $childTable .= '<th>' . _('divers_debut_maj_1') . '</th>';
-        $childTable .= '<th>' . _('divers_fin_maj_1') . '</th>';
-        $childTable .= '<th>' . _('divers_nb_jours_maj_1') . '</th>';
-        $childTable .= '<th>' . _('divers_comment_maj_1') . '</th>';
-        $childTable .= '<th>' . _('divers_type_maj_1') . '</th>';
-        $childTable .= '</tr>';
-        $childTable .= '</thead>';
-        $childTable .= '<tbody>';
-        $childTable .= '<tr>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>';
+        $childThead .= '<th>' . _('divers_debut_maj_1') . '</th>';
+        $childThead .= '<th>' . _('divers_fin_maj_1') . '</th>';
+        $childThead .= '<th>' . _('divers_nb_jours_maj_1') . '</th>';
+        $childThead .= '<th>' . _('divers_comment_maj_1') . '</th>';
+        $childThead .= '<th>' . _('divers_type_maj_1') . '</th>';
+        $childThead .= '</tr>';
+        $childThead .= '</thead>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tr>';
         while ($resultat1 = $ReqLog1->fetch_array()) {
             $sql_date_deb=eng_date_to_fr($resultat1["p_date_deb"]);
             $sql_demi_jour_deb = $resultat1["p_demi_jour_deb"];
@@ -595,13 +597,14 @@ class Fonctions
             $return .= '<h1>' . _('user_change_password') . '</h1>';
             $return .= '<form action="'.$PHP_SELF.'?session='.$session.'&onglet='.$onglet.'" method="POST">';
             $table = new \App\Libraries\Structure\Table();
-            $childTable = '<thead>';
-            $childTable .= '<tr>
+            $thead = new \App\Libraries\Structure\Table\Thead();
+            $childThead = '<tr>
                 <th class="titre">'. _('user_passwd_saisie_1') .'</th>
                 <th class="titre">'. _('user_passwd_saisie_2') .'</th>
                 </tr>';
-            $childTable .= '</thead>';
-            $childTable .= '<tbody>';
+            $thead->addChild($childThead);
+            $table->addChild($thead);
+            $childTable = '<tbody>';
 
             $text_passwd1    = '<input class="form-control" type="password" name="new_passwd1" size="10" maxlength="20" value="">';
             $text_passwd2    = '<input class="form-control" type="password" name="new_passwd2" size="10" maxlength="20" value="">';
@@ -677,22 +680,23 @@ class Fonctions
                 'table-condensed',
                 'table-striped',
             ]);
-            $childTable = '<thead>';
-            $childTable .= '<tr>';
-            $childTable .= '<th>';
-            $childTable .= _('divers_debut_maj_1')  ;
-            $childTable .= '</th>';
-            $childTable .= '<th>'. _('divers_fin_maj_1') .'</th>';
-            $childTable .= '<th>'. _('divers_type_maj_1') .'</th>';
-            $childTable .= '<th>'. _('divers_nb_jours_pris_maj_1') .'</th>';
-            $childTable .= '<th>'. _('divers_comment_maj_1') .'</th>';
-            $childTable .= '<th></th><th></th>' ;
+            $thead = new \App\Libraries\Structure\Table\Thead();
+            $childThead = '<tr>';
+            $childThead .= '<th>';
+            $childThead .= _('divers_debut_maj_1')  ;
+            $childThead .= '</th>';
+            $childThead .= '<th>'. _('divers_fin_maj_1') .'</th>';
+            $childThead .= '<th>'. _('divers_type_maj_1') .'</th>';
+            $childThead .= '<th>'. _('divers_nb_jours_pris_maj_1') .'</th>';
+            $childThead .= '<th>'. _('divers_comment_maj_1') .'</th>';
+            $childThead .= '<th></th><th></th>' ;
             if( $_SESSION['config']['affiche_date_traitement'] ) {
-                $childTable .= '<th >'. _('divers_date_traitement') .'</th>';
+                $childThead .= '<th >'. _('divers_date_traitement') .'</th>';
             }
-            $childTable .= '</tr>';
-            $childTable .= '</thead>';
-            $childTable .= '<tbody>';
+            $childThead .= '</tr>';
+            $thead->addChild($childThead);
+            $table->addChild($thead);
+            $childTable = '<tbody>';
 
             $i = true;
             while ($resultat3 = $ReqLog3->fetch_array()) {
@@ -785,8 +789,8 @@ class Fonctions
             'table',
             'calendrier_saisie_date',
         ]);
-        $childTable = '<thead>
-            <tr>
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr>
             <th colspan="7" class="titre"> '.$mois_name.' '.$year.' </th>
             </tr>
             <tr>
@@ -797,9 +801,10 @@ class Fonctions
             <th class="cal-saisie2">'. _('vendredi_1c') .'</th>
             <th class="cal-saisie2">'. _('samedi_1c') .'</th>
             <th class="cal-saisie2">'. _('dimanche_1c') .'</th>
-            </tr>
-            </thead>';
-        $childTable .= '<tbody>';
+            </tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         $start_nb_day_before = $first_jour_mois_rang -1;
         $stop_nb_day_before = 7 - $last_jour_mois_rang ;
@@ -863,8 +868,11 @@ class Fonctions
             'table',
             'calendrier_saisie_date',
         ]);
-        $childTable = '<thead><tr><th colspan="7" class="titre"> '.$mois_name.' '.$year.' </th></tr><tr><th class="cal-saisie2">'. _('lundi_1c') .'</th><th class="cal-saisie2">'. _('mardi_1c') .'</th><th class="cal-saisie2">'. _('mercredi_1c') .'</th><th class="cal-saisie2">'. _('jeudi_1c') .'</th><th class="cal-saisie2">'. _('vendredi_1c') .'</th><th class="cal-saisie2">'. _('samedi_1c') .'</th><th class="cal-saisie2">'. _('dimanche_1c') .'</th></tr></thead>';
-        $childTable .= '<tbody>';
+        $thead = new \App\Libraries\Structure\Table\Thead();
+        $childThead = '<tr><th colspan="7" class="titre"> '.$mois_name.' '.$year.' </th></tr><tr><th class="cal-saisie2">'. _('lundi_1c') .'</th><th class="cal-saisie2">'. _('mardi_1c') .'</th><th class="cal-saisie2">'. _('mercredi_1c') .'</th><th class="cal-saisie2">'. _('jeudi_1c') .'</th><th class="cal-saisie2">'. _('vendredi_1c') .'</th><th class="cal-saisie2">'. _('samedi_1c') .'</th><th class="cal-saisie2">'. _('dimanche_1c') .'</th></tr>';
+        $thead->addChild($childThead);
+        $table->addChild($thead);
+        $childTable = '<tbody>';
 
         $start_nb_day_before = $first_jour_mois_rang -1;
         $stop_nb_day_before = 7 - $last_jour_mois_rang ;
@@ -1458,24 +1466,25 @@ class Fonctions
                 'table-condensed',
                 'table-striped',
             ]);
-            $childTable = '<thead>';
-            $childTable .= '<tr>';
-            $childTable .= '<th>';
-            $childTable .= _('divers_debut_maj_1');
-            $childTable .= '</th>';
-            $childTable .= '<th>' . _('divers_fin_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_type_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_nb_jours_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_comment_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_etat_maj_1') . '</th>';
-            $childTable .= '<th>' . _('divers_motif_refus') . '</th>';
+            $thead = new \App\Libraries\Structure\Table\Thead();
+            $childThead = '<tr>';
+            $childThead .= '<th>';
+            $childThead .= _('divers_debut_maj_1');
+            $childThead .= '</th>';
+            $childThead .= '<th>' . _('divers_fin_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_type_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_nb_jours_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_comment_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_etat_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_motif_refus') . '</th>';
             if($_SESSION['config']['affiche_date_traitement']) {
-                $childTable .= '<td>' . _('divers_date_traitement') . '</td>';
+                $childThead .= '<th>' . _('divers_date_traitement') . '</th>';
             }
 
-            $childTable .= '</tr>';
-            $childTable .= '</thead>';
-            $childTable .= '<tbody>';
+            $childThead .= '</tr>';
+            $thead->addChild($childThead);
+            $table->addChild($thead);
+            $childTable = '<tbody>';
 
             $i = true;
             while ($resultat2 = $ReqLog2->fetch_array()) {
@@ -1609,25 +1618,26 @@ class Fonctions
                 'table-condensed',
                 'table-striped',
             ]);
-            $childTable = '<thead>';
-            $childTable .= '<tr>';
-            $childTable .= '<td>';
-            $childTable .= '<a href="' . $PHP_SELF . '?session=' . $session . '&onglet=' . $onglet . '&tri_date=descendant"><img src="' . IMG_PATH . '1downarrow-16x16.png" width="16" height="16" border="0" title="trier"></a>';
-            $childTable .= _('divers_debut_maj_1');
-            $childTable .= '<a href="' . $PHP_SELF . '?session=' . $session . '&onglet=' . $onglet . '&tri_date=ascendant"><img src="' . IMG_PATH . '1uparrow-16x16.png" width="16" height="16" border="0" title="trier"></a>';
-            $childTable .= '</td>';
-            $childTable .= '<td>' . _('divers_fin_maj_1') . '</td>';
-            $childTable .= '<td>' . _('user_abs_type') . '</td>';
-            $childTable .= '<td>' . _('divers_nb_jours_maj_1') . '</td>';
-            $childTable .= '<td>' . _('divers_comment_maj_1') . '</td>';
-            $childTable .= '<td>' . _('divers_etat_maj_1') . '</td>';
-            $childTable .= '<td></td><td></td>';
+            $thead = new \App\Libraries\Structure\Table\Thead();
+            $childThead = '<tr>';
+            $childThead .= '<th>';
+            $childThead .= '<a href="' . $PHP_SELF . '?session=' . $session . '&onglet=' . $onglet . '&tri_date=descendant"><img src="' . IMG_PATH . '1downarrow-16x16.png" width="16" height="16" border="0" title="trier"></a> ';
+            $childThead .= _('divers_debut_maj_1');
+            $childThead .= ' <a href="' . $PHP_SELF . '?session=' . $session . '&onglet=' . $onglet . '&tri_date=ascendant"><img src="' . IMG_PATH . '1uparrow-16x16.png" width="16" height="16" border="0" title="trier"></a>';
+            $childThead .= '</th>';
+            $childThead .= '<th>' . _('divers_fin_maj_1') . '</th>';
+            $childThead .= '<th>' . _('user_abs_type') . '</th>';
+            $childThead .= '<th>' . _('divers_nb_jours_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_comment_maj_1') . '</th>';
+            $childThead .= '<th>' . _('divers_etat_maj_1') . '</th>';
+            $childThead .= '<th></th><th></th>';
             if($_SESSION['config']['affiche_date_traitement']) {
-                $childTable .= '<td>' . _('divers_date_traitement') . '</td>';
+                $childThead .= '<th>' . _('divers_date_traitement') . '</th>';
             }
-            $childTable .= '</tr>';
-            $childTable .= '</thead>';
-            $childTable .= '<tbody>';
+            $childThead .= '</tr>';
+            $thead->addChild($childThead);
+            $table->addChild($thead);
+            $childTable = '<tbody>';
 
             $i = true;
             while ($resultat4 = $ReqLog4->fetch_array()) {
