@@ -1402,7 +1402,7 @@ class Fonctions
                 'table-condensed',
                 'table-striped',
             ]);
-            $childTable .= '<thead>';
+            $childTable = '<thead>';
             $childTable .= '<tr align="center">';
             $childTable .= '<th>' . _('divers_debut_maj_1') . '</th>';
             $childTable .= '<th>' . _('divers_fin_maj_1') . '</th>';
