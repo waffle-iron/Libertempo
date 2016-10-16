@@ -79,7 +79,7 @@ abstract class AHtmlElement implements Interfaces\IHtmlElement
     public function getId()
     {
         if ('' === $this->id) {
-            $this->id = uniqid();
+            $this->id = uniqid('i');
         }
         return $this->id;
     }

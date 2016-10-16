@@ -5,13 +5,13 @@ use App\Libraries\Interfaces;
 use App\Libraries\Structure\AHtmlElement;
 
 /**
- * Groupe thead d'une table html
+ * Groupe tbody d'une table html
  *
  * @since  1.9
  * @author Prytoegrian <prytoegrian@protonmail.com>
  * @see    \Tests\Units\App\Libraries\Structure\Table\Thead
  */
-class Thead extends AHtmlElement implements Interfaces\IHeritable
+class TBody extends AHtmlElement implements Interfaces\IHeritable
 {
     /**
      * Liste d'enfants de la section
@@ -26,7 +26,7 @@ class Thead extends AHtmlElement implements Interfaces\IHeritable
      */
     public function render()
     {
-        echo '<thead id="' .  $this->getId() . '"';
+        echo '<tbody id="' .  $this->getId() . '"';
         $this->renderClasses();
         $this->renderAttributes();
         echo '>';
@@ -36,11 +36,11 @@ class Thead extends AHtmlElement implements Interfaces\IHeritable
             } else {
                 /* 1.9 TODO: On peut ajouter n'importe quel fils quitte à faire n'importe quoi,
                 c'est à but transitoire. À terme, il sera nécessaire de n'autoriser
-                que ce qui peut être fils de <thead> : tr */
+                que ce qui peut être fils de <tbody> : tr */
                 echo $child;
             }
         }
-        echo '</thead>';
+        echo '</tbody>';
     }
 
     /**

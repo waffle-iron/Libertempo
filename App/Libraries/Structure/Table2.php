@@ -2,33 +2,22 @@
 namespace App\Libraries\Structure;
 
 use \App\Libraries\Interfaces;
-use \App\Libraries\Structure\Table\Thead;
+use \App\Libraries\Structure\Table\Tr;
 
 /**
- * Table html
+ * Table html au format réduit, uniquement des tr
  *
  * @since  1.9
  * @author Prytoegrian <prytoegrian@protonmail.com>
  * @see    \Tests\Units\App\Libraries\Structure\Table
- * @link https://www.w3.org/TR/html5/tabular-data.html#tabular-data
+ * faire un autoBuild pour la totalité de la table
  */
-class Table extends AHtmlElement implements Interfaces\IHeritable
+class TableMini extends AHtmlElement implements Interfaces\IHeritable
 {
     /**
-     * Liste d'enfants de la table
-     *
-     * @var array
-     * @TODO : à virer dès qu'il n'y a plus autre chose que thead, tfoot, tbody et tr d'injecté
-     * autrement dit quand addChild ne fera plus de $this->children[] = $var
+     * @var array Liste d'enfants <tr> de la table
      */
     private $children = [];
-
-    /**
-     * Section thead du tableau
-     *
-     * @var Thead
-     */
-    private $thead;
 
     /**
      * {@inheritdoc}
@@ -40,9 +29,6 @@ class Table extends AHtmlElement implements Interfaces\IHeritable
         $this->renderClasses();
         $this->renderAttributes();
         echo '>';
-        if ($this->thead instanceof Interfaces\IRenderable) {
-            $this->thead->render();
-        }
         foreach ($this->children as $child) {
             if ($child instanceof Interfaces\IRenderable) {
                 $child->render();
@@ -71,31 +57,15 @@ class Table extends AHtmlElement implements Interfaces\IHeritable
      * {@inheritdoc}
      *
      * @see Interfaces\IHeritable
+     * @throws \Exception Si le fils injecté n'est pas de type Tr
      */
     public function addChild($child)
     {
-        if ($child instanceof Thead) {
-            $this->setHead($child);
-        } else {
+        if ($child instanceof Tr) {
             $this->children[] = $child;
+        } else {
+            throw new \Exception('Child not a Tr object', 1);
         }
-
-    }
-
-    /**
-     * Définit le groupement thead de la table
-     *
-     * @param Thead $thead
-     *
-     * @return void
-     * @throws \LogicException si l'on ajoute plus d'un thead
-     */
-    private function setHead(Thead $thead)
-    {
-        if (!empty($this->thead)) {
-            throw new \LogicException('Un thead maximum');
-        }
-        $this->thead = $thead;
     }
 
 /*
