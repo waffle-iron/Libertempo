@@ -14,7 +14,6 @@ interface IHtmlElement extends IRenderable
      *
      * @param string $class
      *
-     * @return void
      * @since 1.9
      */
     public function addClass($class);
@@ -24,7 +23,6 @@ interface IHtmlElement extends IRenderable
      *
      * @param array $classes
      *
-     * @return void
      * @since 1.9
      */
     public function addClasses(array $classes);
@@ -36,7 +34,6 @@ interface IHtmlElement extends IRenderable
      * @param string $name
      * @param string $value
      *
-     * @return void
      * @since 1.9
      * @deprecated Ne devrait pas être utilisé dans les nouveaux codes
      */
@@ -48,7 +45,6 @@ interface IHtmlElement extends IRenderable
      *
      * @param array $list
      *
-     * @return void
      * @since 1.9
      * @deprecated Ne devrait pas être utilisé dans les nouveaux codes
      */
@@ -57,7 +53,6 @@ interface IHtmlElement extends IRenderable
     /**
      * Renvoie l'id unique de l'élément
      *
-     * @return void
      * @since 1.9
      */
     public function getId();
@@ -67,8 +62,15 @@ interface IHtmlElement extends IRenderable
      *
      * @param string $id
      *
-     * @return void
      * @since 1.9
      */
     public function setId($id);
+
+    /**
+     * Retourne l'élément sous forme de chaîne
+     *
+     * @return string
+     * @deprecated Dans une idée de mise en template, n'est pas utile. En attendant...
+     */
+    public function getString();
 }

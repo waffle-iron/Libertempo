@@ -65,6 +65,10 @@ abstract class AHtmlElement implements Interfaces\IHtmlElement
         }
     }
 
+    /**
+     * {@inheritdoc}
+     * @see Interfaces\IHtmlElement
+     */
     public function addAttributes(array $list)
     {
         foreach ($list as $name => $value) {
@@ -102,7 +106,6 @@ abstract class AHtmlElement implements Interfaces\IHtmlElement
     /**
      * Render les classes de l'élément
      *
-     * @access protected
      * @since  1.9
      * @return void
      */
@@ -116,7 +119,6 @@ abstract class AHtmlElement implements Interfaces\IHtmlElement
     /**
      * Render les attributs quelconques de l'élément
      *
-     * @access protected
      * @since  1.9
      * @return void
      * @deprecated Ne devrait pas être utilisé dans les nouveaux codes
@@ -128,5 +130,15 @@ abstract class AHtmlElement implements Interfaces\IHtmlElement
                 echo ' ' . $name . '="' . $value . '"';
             }
         }
+    }
+
+    /**
+     * {@inheriDoc}
+     */
+    public function getString()
+    {
+        ob_start();
+        $this->render();
+        return ob_get_clean();
     }
 }

@@ -189,7 +189,7 @@ class Fonctions
                 'table-striped',
             ]);
             $thead = new \App\Libraries\Structure\Table\Thead();
-            $childThead = '<th>&nbsp;</th>';
+            $childThead = '<tr><th>&nbsp;</th>';
             $childThead .= '<th>' . _('admin_groupes_groupe') . '</th>';
             $childThead .= '<th>' . _('admin_groupes_libelle') . '</th>';
             $childThead .= '</tr>';

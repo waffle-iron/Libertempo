@@ -20,6 +20,8 @@ class Tr extends AHtmlElement implements Interfaces\IHeritable
      */
     private $children = [];
 
+    //private $nombreCells;
+
     /**
      * {@inheritdoc}
      * @see Interfaces\IRenderable
@@ -36,7 +38,7 @@ class Tr extends AHtmlElement implements Interfaces\IHeritable
         echo '<tr id="' .  $this->getId() . '"';
         $this->renderClasses();
         $this->renderAttributes();
-        echo '>' . $a . ' ---- ';
+        echo '>';
         foreach ($this->children as $child) {
             if ($child instanceof Interfaces\IRenderable) {
                 $child->render();
