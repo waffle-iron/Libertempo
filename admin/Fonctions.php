@@ -169,9 +169,7 @@ class Fonctions
 
         $return .= '</tbody>';
         $table->addChild($childTable);
-        ob_start();
-        $table->render();
-        $return .= ob_get_clean();
+        $return .= $table->getString();
         /*******************************************/
         $return .= '</div>';
         // si on a configuré la double validation
@@ -230,9 +228,7 @@ class Fonctions
 
             $childTable .= '</tbody>';
             $table->addChild($childTable);
-            ob_start();
-            $table->render();
-            $return .= ob_get_clean();
+            $return .= $table->getString();
             $return .= '</div>';
             /*******************************************/
         }
@@ -299,9 +295,8 @@ class Fonctions
         }
         $childTable .= '</tbody>';
         $table->addChild($childTable);
-        ob_start();
-        $table->render();
-        $return .= ob_get_clean();
+        $return .= $table->getString();
+
         return $return;
     }
 
@@ -454,9 +449,7 @@ class Fonctions
         }
         $childTable .= '</tbody>';
         $table->addChild($childTable);
-        ob_start();
-        $table->render();
-        $return .= ob_get_clean();
+        $return .= $table->getString();
         /*******************************************/
         $return .= '</div>';
         $return .= '<div class="col-md-6">';
@@ -516,9 +509,7 @@ class Fonctions
             }
             $childTable .= '</tbody>';
             $table->addChild($childTable);
-            ob_start();
-            $table->render();
-            $return .= ob_get_clean();
+            $return .= $table->getString();
             /*******************************************/
         }
 
@@ -579,9 +570,7 @@ class Fonctions
         }
         $childTable .= '</tbody>';
         $table->addChild($childTable);
-        ob_start();
-        $table->render();
-        $return .= ob_get_clean();
+        $return .= $table->getString();
         return $return;
     }
 
@@ -797,9 +786,7 @@ class Fonctions
 
         $childTable .= '<tbody>';
         $table->addChild($childTable);
-        ob_start();
-        $table->render();
-        $return .= ob_get_clean();
+        $return .= $table->getString();
         $return .= '<hr/>';
         $return .= '<input type="hidden" name="change_group_users" value="ok">';
         $return .= '<input type="hidden" name="choix_group" value="' .  $choix_group . '">';
