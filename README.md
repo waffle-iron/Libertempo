@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/Prytoegrian/Libertempo.png?label=ready&title=Ready)](https://waffle.io/Prytoegrian/Libertempo)
  ![Logo](http://libertempo.tuxfamily.org/Logo-Libertempo.png)
 
 
